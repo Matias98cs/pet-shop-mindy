@@ -5,3 +5,10 @@ footer{
 main{
     background-color: #E9DAC1;
 }
+.carousel-inner{
+    display: flex;
+    margin: 1rem;
+}
+.carousel-item{
+    display: block;
+}
