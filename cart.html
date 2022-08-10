@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="./assets/style/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+    <header style="min-height: 5vh;" class="d-flex flex-column justify-content-center align-content-center flex-wrap">
+
+        <img style="height: 8rem; width: 17rem;" src="./assets/img/logo4.png" alt=""
+            class="d-flex align-self-center m-3">
+        <div class="d-flex justify-content-around w-100 ">
+            <nav class="navbar navbar-expand-lg d-flex align-self-center"
+                style="font-size: 1.3rem  ; font-weight: bold;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="./assets/img/favicon-32x32.png" alt="">
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="./index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contacto</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Productos
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Remedios</a></li>
+                                    <li><a class="dropdown-item" href="#">Juguetes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <button type="button" style="width: 5rem;" class="btn align-self-end m-2"><img src="./assets/img/cart.png"
+                    style="width: 3rem;" alt=""></button>
+        </div>
+         <!-- //------------------------------------------------------------------------header -->
+    </header>
+    <main class="d-flex flex-column align-items-center" style="min-height: 85vh;">
+
+        <div class="mainContainer container d-flex flex-column justify-content-center align-content-center w-100 m-2" style="min-height: 60vh;">
+            <div class="cardList container-fluid bg-light m-3" style="height: 60%;">
+                <div class="contadorCarrito d-flex align-content-center" style="height: 40pt; ">
+                    <h6 class="text-dark p-3 d-flex" style="font-size: 20pt;">Carrito (0)</h6>
+                </div>
+                <hr>
+                <div class="displayProductos container-fluid d-flex flex-column text-secondary justify-content-center w-100 p-2 g-1" style="height: 75%;">
+                        <h3 class="cartPlaceholder-title align-middle">Tu carrito está vacío</h3>
+                        <p class="cartPlaceholder-subtitle">¿No sabés qué comprar? ¡Muchos productos te esperan!</p>
+                </div>
+                <hr>
+                <div class="cartSummary container d-flex w-100 p-2"style="height: 30%;">
+                    <p class="textPlaceholder">¡Suma productos a tu carrito para calcular tu compra!</p>
+                </div>
+            </div>
+            <hr>
+            <div class="cajaDisplayOfertas container-fluid" style="height: 30%; width: 90%;">
+                <div class="ofertasRapidas container">
+                    <h2 class="ofertasCarrito">Productos en liquidación</h2>
+                    <div class="productos container d-flex justify-content-around">
+                        <div class="productomentira d-flex flex-column justify-content-end align-content-end bg-light p-2 m-3" style="height: 15rem; width: 13rem;">
+                            <img src="https://m.media-amazon.com/images/I/51ChF1eG7oL.jpg" alt="1"style="width: 100%; height: 70%;">
+                            <hr>
+                            <p class="descripciondementira text-black">Producto 1</p>
+                        </div>
+                        <div class="productomentira d-flex flex-column justify-content-end align-content-end bg-light p-2 m-3" style="height: 15rem; width: 13rem;">
+                            <img src="https://cf.shopee.com.ar/file/5b51dfd5837209b45009470480daa88e" alt="2"style="width: 100%; height: 70%;">
+                            <hr>
+                            <p class="descripciondementira text-black">Producto 2</p>
+                        </div>
+                        <div class="productomentira d-flex flex-column justify-content-end align-content-end bg-light p-2 m-3" style="height: 15rem; width: 13rem;">
+                            <img src="https://http2.mlstatic.com/D_NQ_NP_939111-MLA46382090824_062021-V.jpg" alt="3"style="width: 100%; height: 70%;">
+                            <hr>
+                            <p class="descripciondementira text-black">Producto 3</p>
+                        </div>
+                        <div class="productomentira d-flex flex-column justify-content-end align-content-end bg-light p-2 m-3" style="height: 15rem; width: 13rem;">
+                            <img src="https://http2.mlstatic.com/D_NQ_NP_812449-MLA49434006019_032022-V.jpg" alt="4"style="width: 100%; height: 70%;">
+                            <hr>
+                            <p class="descripciondementira text-black">Producto 4</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- //------------------------------------------------------------------------carta --> 
+    </main>
+
+    <footer class="  text-center text-lg-start text-white">
+        <!-- Grid container -->
+        <div class="container p-4 ">
+            <!--Grid row-->
+            <div class="row my-4">
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+
+                    <div class="rounded-circle bg-white shadow-1-strong d-flex align-items-center justify-content-center mb-4 mx-auto"
+                        style="width: 200px; height: 200px;">
+                        <img src="https://media.discordapp.net/attachments/993579792077176842/1006670410382856293/logo2.png?width=1144&height=525"
+                            height="70" alt="" loading="lazy" />
+                    </div>
+
+                    <p class="text-center">Pet Shop familiar dedicado a nuesta perrita Mindy</p>
+
+                    <ul class="list-unstyled d-flex flex-row justify-content-center">
+                        <li>
+                            <a class="text-white px-2" href="#!">
+                                <i class="fab fa-facebook-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-white px-2" href="#!">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-white ps-2" href="#!">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Productos</h5>
+
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="#!" class="text-white"><i class="fas fa-paw pe-3"></i>Remedios</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#!" class="text-white"><i class="fas fa-paw pe-3"></i>Juguetes</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#!" class="text-white"><i class="fas fa-paw pe-3"></i>Ofertas Especiales</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#!" class="text-white"><i class="fas fa-paw pe-3"></i>Paseador de perros</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#!" class="text-white"><i class="fas fa-paw pe-3"></i>Ropa</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="#!" class="text-white"><i class="fas fa-paw pe-3"></i>Guardería de mascotas</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4">Contacto</h5>
+
+                    <ul class="list-unstyled">
+                        <li class="mb-2>
+                            <p><i class="fas fa-map-marker-alt pe-2"></i>Río de Janeiro 300, Caballito</p>
+                        </li>
+                        <li class="mb-2>
+                            <p><i class="fas fa-map-marker-alt pe-2"></i><a href="tel:" class="text-white"><i
+                                        class="fas fa-paw pe-3"></i>+ 01 234 567 89</a></p>
+                        </li>
+                        <li class="mb-2>
+                            <p><i class="fas fa-map-marker-alt pe-2"></i><a href="mailto:mindypetshop@yahoo.com"
+                                    class="text-white"><i class="fas fa-paw pe-3"></i>mindypetshop@yahoo.com</a></p>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2022 Copyright:
+            <a class="text-white">Cinthya, Laura, Marcos, Matias, Ulises, Facundo</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
