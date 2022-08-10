@@ -1,8 +1,14 @@
+
+#carouselExampleDark{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
 footer{
     background-color: #54BAB9 ;
 }
 
 main{
+<<<<<<< HEAD
     background-color: #E9DAC1;
 }
 .carousel-inner{
@@ -11,4 +17,23 @@ main{
 }
 .carousel-item{
     display: block;
+=======
+    background-color: #F7ECDE;
+}
+
+.form2{
+    background-color: #9ED2C6;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
+}
+
+.enviar{
+    background-color: #54BAB9 !important;
+}
+
+
+.circulo{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+>>>>>>> 4b5202f7a9b8bae9add7cc77f6ede06bf5fed5c1
 }
