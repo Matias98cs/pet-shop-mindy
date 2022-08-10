@@ -27,6 +27,79 @@ main{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+
+
+/* ESTILOS BOTONES */
+
+.col1 img{
+    box-shadow: 1px 1px 30px -10px #999;
+    border-radius: 7rem;
+    position: relative;
+    top: 2px;
+    width: 10rem;
+    
+}
+
+
+#menu-container{
+    height: 20rem;
+    
+}
+
+#menu-container .content-item a{
+    margin-right:3rem;
+    
+}
+
+#menu-container .content-item{
+    display: flex;  
+    justify-content: center;
+
+}
+#menu-container a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    text-decoration: none;
+    text-align: center;
+    color: #000000;
+}
+
+.title-menu {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    color:#000;
+    margin-top: 2rem;
+}
+
+.title-negrita{
+    
+    font-weight:700;
+    margin-left: .5rem;
+    
+}
+#menu-container .content-item .col1 img:hover {
+    width: 11rem;
+    border: 4px solid transparent;
+    background: rgb(147,255,239) !important; 
+    background: radial-gradient(circle, rgba(147,255,239,1) 7%, rgba(193,255,241,1) 59%, rgba(0,195,193,1) 75%) !important;
+    border-radius:7rem;
+    
+}
+
+#menu-container .content-item .col1{
+    height: 10.5rem;
+    
+}
+
+.slider-category .content-item p {
+    font-size:15px;
+    font-weight: 600;
+    color: #4B4B4B;
+}
+
 .btn{
     background-color:#54BAB9 !important;
     color:white !important;
