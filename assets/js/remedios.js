@@ -7,9 +7,9 @@ let carrito = [];
 
 const getData = async () => {
     await fetch("https://apipetshop.herokuapp.com/api/articulos")
-    .then((res) => res.json())
-    .then((json) => (data = json))
-    .catch((error) => console.log(error));
+        .then((res) => res.json())
+        .then((json) => (data = json))
+        .catch((error) => console.log(error));
     pintarProductos(filtrosRemedios(data.response), contenedorRemedios);
     pintarLiquidacion(filtrarStock(filtrosRemedios(data.response)), liquidacion)
 };
@@ -23,11 +23,11 @@ function filtrosRemedios(array) {
 
 function pintarProductos(array, contenedor) {
     array.forEach((item) => {
-    let card = document.createElement("div");
-    card.className = "card m-3";
-    card.style.width = "20rem";
-    card.style.height = "auto";
-    card.innerHTML = `
+        let card = document.createElement("div");
+        card.className = "card m-3";
+        card.style.width = "20rem";
+        card.style.height = "auto";
+        card.innerHTML = `
         <img class="card-img" src="${item.imagen}" style="width: auto; height: 18rem" alt="Vans">
         <div class="card-img d-flex justify-content-end">
             <a href="#" class="card-link text-danger like">
@@ -55,12 +55,12 @@ function pintarProductos(array, contenedor) {
     });
 }
 
-function filtrarStock(array){
-    let stockBajo = array.filter( item => item.stock <= 3);
+function filtrarStock(array) {
+    let stockBajo = array.filter(item => item.stock <= 3);
     return stockBajo;
 }
 
-function pintarLiquidacion(array, contenedor){
+function pintarLiquidacion(array, contenedor) {
     array.forEach((item) => {
         let card = document.createElement("div");
         card.className = "card m-3";
@@ -83,21 +83,21 @@ function pintarLiquidacion(array, contenedor){
             </div>
             </div>
             </div>`;
-            contenedor.appendChild(card);
+        contenedor.appendChild(card);
 
-            const btnComprar = document.querySelector(`#producto-${item._id}`);
-            btnComprar.addEventListener('click', () => {
+        const btnComprar = document.querySelector(`#producto-${item._id}`);
+        btnComprar.addEventListener('click', () => {
             agregarCompras(item._id, array);
         })
-        });
+    });
 }
 
-function agregarCompras(nroId, array){
+function agregarCompras(nroId, array) {
     let nuevoObj;
 
     array.forEach((personaje) => {
         const { _id, nombre, precio, stock, imagen, tipo } = personaje;
-        if(personaje._id === nroId) {
+        if (personaje._id === nroId) {
             nuevoObj = {
                 id: _id,
                 nombre: nombre,
@@ -110,12 +110,12 @@ function agregarCompras(nroId, array){
         }
     });
 
-    if(carrito.some( producto => producto.id === nuevoObj.id)) {
+    if (carrito.some(producto => producto.id === nuevoObj.id)) {
         const cantidadProducto = carrito.map(producto => {
             if (producto.id === nuevoObj.id) {
                 let cantidad = producto.cantidad;
                 let precio = producto.precio;
-                if(!(producto.stock === producto.cantidad)){
+                if (!(producto.stock === producto.cantidad)) {
                     precio += producto.precio
                     cantidad++
                     producto.cantidad = cantidad;
@@ -138,26 +138,27 @@ function agregarCompras(nroId, array){
     pintarCarrito(carrito, contenedorCarrito)
 }
 
-function pintarCarrito(array, contenedor){
+function pintarCarrito(array, contenedor) {
 
     contenedor.innerHTML = ""
-    array.forEach( ele => {
+    array.forEach(ele => {
         let div = document.createElement('div');
+        div.classList.add('d-flex', 'justify-content-center')
         div.innerHTML = `
-            <tr>
-                <th><img src="${ele.imagen}" width="120"></th>
-                <td>${ele.nombre} </td>
-                <td>${ele.cantidad}</td>
-                <td>
-                    <button class="btn btn-info btn-sm">
-                        +
-                    </button>
-                    <button class="btn btn-danger btn-sm">
-                        -
-                    </button>
-                </td>
-                <td>$ <span>${ele.precio}</span></td>
-            </tr>
+        <div class="card mb-3" style="max-width: 90%;">
+            <div class="row g-0">
+            <div class="col-md-4 d-flex justify-content-center ">
+                <img src="${ele.imagen}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">${ele.nombre}</h5>
+                    <p class="card-text">${ele.cantidad}</p>
+                    <p class="card-text"><small class="text-muted">${ele.precio}</small></p>
+                </div>
+                </div>
+            </div>
+        </div>
         `
         contenedor.appendChild(div)
     })
