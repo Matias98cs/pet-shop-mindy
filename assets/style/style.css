@@ -8,7 +8,7 @@ footer{
 }
 
 main{
-    background-color: #F7ECDE;
+    background-color: #E9DAC1;
 }
 
 .form2{
@@ -26,3 +26,25 @@ main{
 .circulo{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+
+.btnColor {
+    background-color: #54BAB9 !important;
+    border: none;
+}
+
+.contenedorLiquidacion {
+    background-color: #9ED2C6;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+    padding-bottom: 2em;
+    padding-top: 1em;
+}
+
+.card {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+h2 {
+    font-size: 2.5rem !important;
+}
+

@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Farmacia</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="./assets/style/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-        <link rel="shortcut icon" href="./assets/img/favicon-96x96.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/favicon-96x96.png" type="image/x-icon">
 </head>
 
 <body>
@@ -41,7 +41,7 @@
                                     Productos
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="farmacia.html">Farmacia</a></li>
+                                    <li><a class="dropdown-item" href="#">Remedios</a></li>
                                     <li><a class="dropdown-item" href="#">Juguetes</a></li>
                                 </ul>
                             </li>
@@ -49,10 +49,25 @@
                     </div>
                 </div>
             </nav>
-            <button type="button" style="width: 5rem;" class="btn align-self-end m-2"><a href="./cart.html"><img src="./assets/img/cart.png"
-                    style="width: 3rem;" alt=""></a></button>
+            
+            
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                <img src="./assets/img/cart.png" style="width: 3rem;" alt="">
+            </button>
+
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div id="contenedorCarrito">
+
+                </div>
+            </div>
+
         </div>
-         <!-- //------------------------------------------------------------------------header -->
+        <!-- //------------------------------------------------------------------------header -->
     </header>
     <main style="min-height: 80vh;">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -105,25 +120,19 @@
             </button>
         </div>
         <!-- //------------------------------------------------------------------------carousel -->
-        <div class="d-flex p-4">
-            <div class="card container-sm justify-content-center">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="./assets/img/unknown.png" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="d-flex justify-content-center align-content-center flex-column contenedorLiquidacion">
+            <h2 class="text-center p-3">Productos en Liquidacion</h2>
+            <div class="d-flex flex-wrap justify-content-center align-content-center gap-3" id="destacados">
 
+            </div>
         </div>
-        <!-- //------------------------------------------------------------------------carta --> 
+
+        <div class="d-flex justify-content-center align-content-center mt-4 pb-4">
+            <div class="d-flex flex-wrap justify-content-center align-content-center gap-3" id="containerRemedios">
+
+            </div>
+        </div>
+        <!-- //------------------------------------------------------------------------carta -->
 
     </main>
 
@@ -220,7 +229,7 @@
     </footer>
 
 
-    <!-- JavaScript Bundle with Popper -->
+    <script src="./assets/js/remedios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
