@@ -38,5 +38,5 @@ const mapeoData = (array, donde) => {
         </div>`
         donde.appendChild(card)
     })
-}
+} 
 
