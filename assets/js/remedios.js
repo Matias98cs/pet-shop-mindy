@@ -51,7 +51,6 @@ function pintarProductos(array, contenedor) {
 
         const btnComprar = document.querySelector(`#producto-${item._id}`);
         btnComprar.addEventListener('click', () => {
-            // let cantidadPedida = cantidad.value;
             agregarCompras(item._id, array);
         })
     });
