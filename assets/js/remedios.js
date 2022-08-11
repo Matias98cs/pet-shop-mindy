@@ -163,7 +163,7 @@ function pintarCarrito(array, contenedor) {
                 <div class="d-flex justify-content-evenly">
                     <button type="button" style="width:2.5rem" class="btn btn-light">+</button>
                     <button type="button" style="width:2.5rem" class="btn btn-light">-</button>
-                </div>
+                </div> 
                 </div>
                 </div>
             </div>
