@@ -2,6 +2,8 @@
 const contenedorRemedios = document.querySelector("#containerRemedios");
 const liquidacion = document.querySelector('#destacados');
 const contenedorCarrito = document.querySelector('#contenedorCarrito');
+const cart = document.querySelector('.offcanvas-body')
+console.log(cart)
 let carrito = [];
 
 
@@ -134,8 +136,10 @@ function agregarCompras(nroId, array) {
         carrito = [...carrito, nuevoObj];
     }
 
-    console.log(carrito.length)
+    console.log(carrito)
     pintarCarrito(carrito, contenedorCarrito)
+    let carritoString = JSON.stringify(carrito)
+    localStorage.setItem('carrito', carritoString);
 }
 
 function pintarCarrito(array, contenedor) {
@@ -143,18 +147,24 @@ function pintarCarrito(array, contenedor) {
     contenedor.innerHTML = ""
     array.forEach(ele => {
         let div = document.createElement('div');
+        div.style.width = "20rem";
+        div.style.height = "auto";
         div.classList.add('d-flex', 'justify-content-center')
         div.innerHTML = `
         <div class="card mb-3" style="max-width: 90%;">
             <div class="row g-0">
-            <div class="col-md-4 d-flex justify-content-center ">
-                <img src="${ele.imagen}" class="img-fluid rounded-start" alt="...">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <img src="${ele.imagen}" class="img-fluid rounded-start" style="width: auto; height: 10rem" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">${ele.nombre}</h5>
-                    <p class="card-text">${ele.cantidad}</p>
-                    <p class="card-text"><small class="text-muted">${ele.precio}</small></p>
+                    <p class="card-text">Cantidad: ${ele.cantidad}</p>
+                    <p class="card-text"><small class="text-muted">Precio: ${ele.precio}</small></p>
+                <div class="d-flex justify-content-evenly">
+                    <button type="button" style="width:2.5rem" class="btn btn-light">+</button>
+                    <button type="button" style="width:2.5rem" class="btn btn-light">-</button>
+                </div>
                 </div>
                 </div>
             </div>
@@ -163,3 +173,11 @@ function pintarCarrito(array, contenedor) {
         contenedor.appendChild(div)
     })
 }
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    let carritoJSON = JSON.parse(localStorage.getItem("carrito"))
+    console.log(carritoJSON)
+    pintarCarrito(carritoJSON, contenedorCarrito)
+})
+
+
