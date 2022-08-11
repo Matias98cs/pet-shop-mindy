@@ -51,14 +51,13 @@ function pintarProductos(array, contenedor) {
 
         const btnComprar = document.querySelector(`#producto-${item._id}`);
         btnComprar.addEventListener('click', () => {
-            // let cantidadPedida = cantidad.value;
             agregarCompras(item._id, array);
         })
     });
 }
 
 function filtrarStock(array) {
-    let stockBajo = array.filter(item => item.stock < 3);
+    let stockBajo = array.filter(item => item.stock <= 3);
     return stockBajo;
 }
 
