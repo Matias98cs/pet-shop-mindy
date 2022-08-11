@@ -58,11 +58,14 @@
 
             <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
                 aria-labelledby="offcanvasWithBothOptionsLabel">
-                <div class="offcanvas-header pb-5">
+                <div class="offcanvas-header justify-content-between pb-5">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <button class="btn d-flex">Vaciar carrito</button>
                 </div>
-                <div id="contenedorCarrito" class="d-flex flex-column justify-content-center align-items-center" style="overflow-y: scroll">
+                <div class="offcanvas-body">
+                <div id="contenedorCarrito" class="d-flex flex-column justify-content-center align-items-center" style="overflow: hidden;">
 
+                </div>
                 </div>
             </div>
 
@@ -143,7 +146,6 @@
             <div class="row my-4">
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-
                     <div class="rounded-circle bg-white shadow-1-strong d-flex align-items-center justify-content-center mb-4 mx-auto"
                         style="width: 200px; height: 200px;">
                         <img src="https://media.discordapp.net/attachments/993579792077176842/1006670410382856293/logo2.png?width=1144&height=525"
