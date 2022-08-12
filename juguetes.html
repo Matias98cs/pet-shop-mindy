@@ -52,30 +52,19 @@
                 </div>
             </nav>          
             <button class="btn" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-                <img src="./assets/img/cart.png" style="width: 3rem;" alt="">
+                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                <img src="./assets/img/cart.png" style="width: 3rem; border: none;" alt="">
             </button>
+
             <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
                 aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas-header justify-content-between pb-5">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    <button class="btn d-flex">Vaciar carrito</button>
+                    <button  id="vaciarCarrito" class="btn d-flex">Vaciar carrito</button>
+                    <button id="comprar" class="btn d-flex">COMPRA</button>
                 </div>
-                <div class="offcanvas-body">
-                <div id="contenedorCarrito" class="d-flex flex-column justify-content-center align-items-center" style="overflow: hidden;">
-                </div>
-                </div>
-            </div>
-        </div>
-         <!-- //------------------------------------------------------------------------header -->
-    </header>
-            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-                aria-labelledby="offcanvasWithBothOptionsLabel">
-                <div class="offcanvas-header justify-content-between pb-5">
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    <button class="btn d-flex">Vaciar carrito</button>
-                </div>
-                <div class="offcanvas-body">
+                <div id="imgConte" class="offcanvas-body d-flex justify-content-center align-items-center">
+                    
                 <div id="contenedorCarrito" class="d-flex flex-column justify-content-center align-items-center" style="overflow: hidden;">
                 </div>
                 </div>
@@ -249,7 +238,8 @@
         © 2022 Cohort 31:
         <a class="text-white">Cinthya, Laura, Marcos, Matias, Ulises, Facundo</a>
     </div>
-</footer>    
+</footer>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./assets/js/juguetes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
