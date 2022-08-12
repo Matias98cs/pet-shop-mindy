@@ -45,12 +45,17 @@ main{
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border: 1px solid white;
-    width: 55rem !important;
+    text-shadow: 2px 2px white;
+
+}
+h2{
+    text-shadow: 2px 2px white;
 }
 
+
 #h3mindy{
-    padding: 2rem;
-    background-color: #54BAB9;
+    padding: 1rem;
+
     border-radius: 10px;
     color: white;
     text-shadow: 2px 2px#000;
