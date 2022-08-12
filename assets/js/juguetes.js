@@ -139,8 +139,10 @@ function agregarCompras(nroId, array) {
         carrito = [...carrito, nuevoObj];
     }
 
+    console.log(carrito)
     pintarCarrito(carrito, contenedorCarrito);
     let carritoString = JSON.stringify(carrito);
+    console.log(carritoString);
     localStorage.setItem('carrito', carritoString);
 }
 
@@ -189,6 +191,8 @@ function pintarCarrito(array, contenedor) {
 
 btnVaciar.addEventListener('click', ()=>{
     contenedorCarrito.innerHTML = ''
+    carrito = []
+    console.log(carrito)
     localStorage.clear()
 })
 
@@ -213,7 +217,7 @@ function sumarCantidad(idProducto, stock){
     pintarCarrito(carrito, contenedorCarrito);
 }
 
-function restarCantidad(idProducto, stock){
+function restarCantidad(idProducto){
     let carrito = JSON.parse(localStorage.getItem('carrito'));
 
     carrito = carrito.map( ele => {

@@ -195,6 +195,16 @@ function pintarCarrito(array, contenedor) {
     })
 }
 
+btnVaciar.addEventListener('click', ()=>{
+    contenedorCarrito.innerHTML = ''
+    console.log("localStorage borrado")
+    localStorage.clear()
+})
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    let carritoJSON = JSON.parse(localStorage.getItem("carrito"))
+    pintarCarrito(carritoJSON, contenedorCarrito)
+})
 function sumarCantidad(idProducto, stock){
     let carrito = JSON.parse(localStorage.getItem('carrito'));
 
