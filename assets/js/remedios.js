@@ -8,8 +8,6 @@ const textoCarrito = document.querySelector('#textoCarrito')
 const comprar = document.querySelector('#comprar')
 
 let carrito = [];
-let restarClick = 0;
-let sumarClick = 0;
 
 const getData = async () => {
     await fetch("https://apipetshop.herokuapp.com/api/articulos")
@@ -19,8 +17,15 @@ const getData = async () => {
     pintarProductos(filtrosRemedios(data.response), contenedorRemedios);
     pintarLiquidacion(filtrarStock(filtrosRemedios(data.response)), liquidacion)
 };
-
 getData();
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    console.log(carrito)
+    pintarCarrito(carrito, contenedorCarrito)
+})
+
 
 function filtrosRemedios(array) {
     let remedios = array.filter((producto) => producto.tipo === "Medicamento");
@@ -55,7 +60,6 @@ function pintarProductos(array, contenedor) {
 
         const btnComprar = document.querySelector(`#producto-${item._id}`);
         btnComprar.addEventListener('click', () => {
-            console.log(item._id)
             agregarCompras(item._id, array);
         })
     });
@@ -99,6 +103,7 @@ function pintarLiquidacion(array, contenedor) {
 }
 
 function agregarCompras(nroId, array) {
+    console.log(carrito)
     let nuevoObj;
 
     array.forEach((producto) => {
@@ -119,8 +124,8 @@ function agregarCompras(nroId, array) {
     if (carrito.some(producto => producto.id === nuevoObj.id)) {
         const cantidadProducto = carrito.map(producto => {
             if (producto.id === nuevoObj.id) {
-                let cantidad = producto.cantidad;
-                let precio = producto.precio;
+                // let cantidad = producto.cantidad;
+                // let precio = producto.precio;
                 if (!(producto.stock === producto.cantidad)) {
                     // precio += producto.precio
                     // cantidad++
@@ -149,10 +154,12 @@ function pintarCarrito(array, contenedor) {
 
     contenedor.innerHTML = ""
     array.forEach(ele => {
+        let total = ele.cantidad * ele.precio;
+        ele.total = total
         let div = document.createElement('div');
         div.style.width = "20rem";
         div.style.height = "auto";
-        div.classList.add('d-flex', 'justify-content-center')
+        div.classList.add('d-flex', 'justify-content-center');
         div.innerHTML = `
         <div class="card mb-3" style="max-width: 90%;">
             <div class="row g-0">
@@ -164,7 +171,7 @@ function pintarCarrito(array, contenedor) {
                     <h5 class="card-title">${ele.nombre}</h5>
                     <p class="card-text"><small class="text-muted">Stock: </small><strong>${ele.stock}</strong></p>
                     <p class="card-text">Cantidad: ${ele.cantidad}</p>
-                    <p class="card-text"><small class="text-muted">Precio: $${ele.precio}</small></p>
+                    <p class="card-text"><small class="text-muted">Precio: $${total}</small></p>
 
                 <div class="d-flex justify-content-evenly">
                     <button id="mas-${ele.id}" type="button" style="width:2.5rem" class="btn btn-light">+</button>
@@ -183,7 +190,7 @@ function pintarCarrito(array, contenedor) {
         }))
 
         btnResta.forEach( boton => boton.addEventListener('click', () => {
-            restarCantidad(ele.id, ele.stock)
+            restarCantidad(ele.id)
         }))
     })
 }
@@ -198,29 +205,30 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let carritoJSON = JSON.parse(localStorage.getItem("carrito"))
     pintarCarrito(carritoJSON, contenedorCarrito)
 })
-
-
 function sumarCantidad(idProducto, stock){
     let carrito = JSON.parse(localStorage.getItem('carrito'));
 
+    let cantidadTotal = 0;
+
     carrito = carrito.map( ele => {
             if(ele.id === idProducto && ele.cantidad < stock){
-                ele.cantidad +=1
-            }else{
-                console.log('ya se agoto no hay mas!!!!');
+                ele.cantidad +=1;
+                ele.total += ele.total;
+                cantidadTotal += ele.total
             }
             return ele;
     })
+
     localStorage.setItem('carrito', JSON.stringify(carrito));
     pintarCarrito(carrito, contenedorCarrito);
 }
 
-function restarCantidad(idProducto, stock){
+function restarCantidad(idProducto){
     let carrito = JSON.parse(localStorage.getItem('carrito'));
 
     carrito = carrito.map( ele => {
             if(ele.id === idProducto && ele.cantidad > 1){
-                ele.cantidad -=1
+                ele.cantidad -=1;
             }
             return ele;
     })
@@ -229,6 +237,7 @@ function restarCantidad(idProducto, stock){
 }
 
 comprar.addEventListener('click', () => {
+
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn m-1',
@@ -246,14 +255,14 @@ comprar.addEventListener('click', () => {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
+            contenedorCarrito.innerHTML = ''
+            localStorage.clear()
             swalWithBootstrapButtons.fire(
             'Comprado!',
             'Su compra ha sido exitosa :)',
             'success',
-            contenedorCarrito.innerHTML = ''
         )
         } else if (
-          /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
         ) {
             swalWithBootstrapButtons.fire(
@@ -264,4 +273,11 @@ comprar.addEventListener('click', () => {
         }
 
     })
+
+
+})
+
+btnVaciar.addEventListener('click', ()=>{
+    contenedorCarrito.innerHTML = ''
+    localStorage.clear();
 })
