@@ -153,3 +153,6 @@ h2 {
     font-size: 2.5rem !important;
 }
 
+.conetedorCarrito {
+    min-height: 30vh;
+}
