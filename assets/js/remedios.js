@@ -190,6 +190,7 @@ function pintarCarrito(array, contenedor) {
 
 btnVaciar.addEventListener('click', ()=>{
     contenedorCarrito.innerHTML = ''
+    console.log("localStorage borrado")
     localStorage.clear()
 })
 
