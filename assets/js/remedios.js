@@ -7,6 +7,7 @@ const btnVaciar = document.querySelector('#vaciarCarrito');
 const textoCarrito = document.querySelector('#textoCarrito')
 const comprar = document.querySelector('#comprar')
 
+
 let carrito = [];
 
 const getData = async () => {
@@ -21,7 +22,6 @@ getData();
 
 document.addEventListener("DOMContentLoaded", ()=>{
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
     console.log(carrito)
     pintarCarrito(carrito, contenedorCarrito)
 })
@@ -162,13 +162,16 @@ function pintarCarrito(array, contenedor) {
         div.classList.add('d-flex', 'justify-content-center');
         div.innerHTML = `
         <div class="card mb-3" style="max-width: 90%;">
+            <button type="button" class="close align-self-end border-0 bg-white" aria-label="Close" style="width: 3rem">
+                <span aria-hidden="true" class="display-6">&times;</span>
+            </button>
             <div class="row g-0">
             <div class="col-md-4 d-flex justify-content-center align-items-center">
                 <img src="${ele.imagen}" class="img-fluid rounded-start" style="width: auto; height: 10rem" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">${ele.nombre}</h5>
+                    <p class="card-title"><b>${ele.nombre}</b></p>
                     <p class="card-text"><small class="text-muted">Stock: </small><strong>${ele.stock}</strong></p>
                     <p class="card-text">Cantidad: ${ele.cantidad}</p>
                     <p class="card-text"><small class="text-muted">Precio: $${total}</small></p>
@@ -185,6 +188,8 @@ function pintarCarrito(array, contenedor) {
         contenedor.appendChild(div)
         const btnSumar = document.querySelectorAll(`#mas-${ele.id}`);
         const btnResta = document.querySelectorAll(`#menos-${ele.id}`);
+        const close = document.querySelectorAll(".close")
+
         btnSumar.forEach(boton => boton.addEventListener('click', () => {
             sumarCantidad(ele.id, ele.stock)
         }))
@@ -192,12 +197,17 @@ function pintarCarrito(array, contenedor) {
         btnResta.forEach( boton => boton.addEventListener('click', () => {
             restarCantidad(ele.id)
         }))
+
+        close.forEach(close => close.addEventListener('click', (e)=>{
+            console.log(e.target.parentElement)
+        }))
     })
 }
 
 btnVaciar.addEventListener('click', ()=>{
     contenedorCarrito.innerHTML = ''
     console.log("localStorage borrado")
+    carrito = [];
     localStorage.clear()
 })
 

@@ -122,7 +122,7 @@ function pintarCarrito(array, contenedor) {
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">${ele.nombre}</h5>
+                    <p class="card-title"><b>${ele.nombre}</b></p>
                     <p class="card-text"><small class="text-muted">Stock: </small><strong>${ele.stock}</strong></p>
                     <p class="card-text">Cantidad: ${ele.cantidad}</p>
                     <p class="card-text"><small class="text-muted">Precio: $${ele.precio}</small></p>
@@ -151,6 +151,7 @@ function pintarCarrito(array, contenedor) {
 
 btnVaciar.addEventListener('click', ()=>{
     contenedorCarrito.innerHTML = ''
+    carrito = [];
     localStorage.clear()
 })
 
@@ -203,7 +204,9 @@ function sumarCantidad(idProducto, stock){
 
     carrito = carrito.map( ele => {
             if(ele.id === idProducto && ele.cantidad < stock){
-                ele.cantidad +=1
+                ele.cantidad +=1;
+                ele.total += ele.total;
+                cantidadTotal += ele.total
             }else{
                 console.log('ya se agoto no hay mas!!!!');
             }
@@ -262,5 +265,7 @@ comprar.addEventListener('click', () => {
 
     })
 })
+
+
 
 
