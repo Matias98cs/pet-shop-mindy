@@ -6,9 +6,11 @@ const cart = document.querySelector('.offcanvas-body')
 const btnVaciar = document.querySelector('#vaciarCarrito');
 const textoCarrito = document.querySelector('#textoCarrito')
 const comprar = document.querySelector('#comprar')
+const canvasBody = document.querySelector('.offcanvas-body')
 
 
 let carrito = [];
+let total = 0
 
 const getData = async () => {
     await fetch("https://apipetshop.herokuapp.com/api/articulos")
@@ -17,13 +19,12 @@ const getData = async () => {
         .catch((error) => console.log(error));
     pintarProductos(filtrosRemedios(data.response), contenedorRemedios);
     pintarLiquidacion(filtrarStock(filtrosRemedios(data.response)), liquidacion)
+    pintarCarrito(filtrosRemedios(data.response), carrito)
 };
 getData();
 
 document.addEventListener("DOMContentLoaded", ()=>{
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    console.log(carrito)
-    pintarCarrito(carrito, contenedorCarrito)
 })
 
 
@@ -103,7 +104,6 @@ function pintarLiquidacion(array, contenedor) {
 }
 
 function agregarCompras(nroId, array) {
-    console.log(carrito)
     let nuevoObj;
 
     array.forEach((producto) => {
@@ -162,8 +162,10 @@ function pintarCarrito(array, contenedor) {
         div.classList.add('d-flex', 'justify-content-center');
         div.innerHTML = `
         <div class="card mb-3" style="max-width: 90%;">
-            <button type="button" class="close align-self-end border-0 bg-white" aria-label="Close" style="width: 3rem">
-                <span aria-hidden="true" class="display-6">&times;</span>
+            <button type="button" name="boton" class="close align-self-end border-0 bg-white" id=close-${ele.id} aria-label="Close" style="width: 3rem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
             </button>
             <div class="row g-0">
             <div class="col-md-4 d-flex justify-content-center align-items-center">
@@ -186,9 +188,12 @@ function pintarCarrito(array, contenedor) {
         </div>
         `
         contenedor.appendChild(div)
+        const totalCarrito = document.querySelector("#total")
         const btnSumar = document.querySelectorAll(`#mas-${ele.id}`);
         const btnResta = document.querySelectorAll(`#menos-${ele.id}`);
-        const close = document.querySelectorAll(".close")
+        const close = document.querySelectorAll(`#close-${ele.id}`)
+        
+        cuentaCarrito(array, totalCarrito)
 
         btnSumar.forEach(boton => boton.addEventListener('click', () => {
             sumarCantidad(ele.id, ele.stock)
@@ -198,8 +203,14 @@ function pintarCarrito(array, contenedor) {
             restarCantidad(ele.id)
         }))
 
-        close.forEach(close => close.addEventListener('click', (e)=>{
-            console.log(e.target.parentElement)
+        close.forEach(item => item.addEventListener('click', ()=>{
+            let filtro = carrito.find(item => item.id === ele.id)
+            carrito = carrito.filter(item => item != filtro)
+            pintarCarrito(carrito, contenedorCarrito)
+            if(carrito.length === 0){
+            document.querySelector("#total").innerHTML = ""
+            }
+            localStorage.setItem('carrito', JSON.stringify(carrito));
         }))
     })
 }
@@ -208,6 +219,7 @@ btnVaciar.addEventListener('click', ()=>{
     contenedorCarrito.innerHTML = ''
     console.log("localStorage borrado")
     carrito = [];
+    document.querySelector("#total").innerHTML = ""
     localStorage.clear()
 })
 
@@ -215,15 +227,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
     let carritoJSON = JSON.parse(localStorage.getItem("carrito"))
     pintarCarrito(carritoJSON, contenedorCarrito)
 })
+
 function sumarCantidad(idProducto, stock){
     let carrito = JSON.parse(localStorage.getItem('carrito'));
-
-    let cantidadTotal = 0;
 
     carrito = carrito.map( ele => {
             if(ele.id === idProducto && ele.cantidad < stock){
                 ele.cantidad +=1;
-                ele.total += ele.total;
+                cantidadTotal = ele.total += ele.total;
                 cantidadTotal += ele.total
             }
             return ele;
@@ -247,7 +258,7 @@ function restarCantidad(idProducto){
 }
 
 comprar.addEventListener('click', () => {
-
+    
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn m-1',
@@ -257,7 +268,7 @@ comprar.addEventListener('click', () => {
     })
     swalWithBootstrapButtons.fire({
         title: '¿Quieres realizar la compra?',
-        text: "Estas por comprar",
+        text: `${document.querySelector("#total").textContent}`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Comprar',
@@ -283,11 +294,9 @@ comprar.addEventListener('click', () => {
         }
 
     })
-
-
 })
 
-btnVaciar.addEventListener('click', ()=>{
-    contenedorCarrito.innerHTML = ''
-    localStorage.clear();
-})
+const cuentaCarrito = (array, contenedor) => {
+    let arrayTotal = array.map(item => item.total).reduce((acc, total) => acc+total)
+    contenedor.innerHTML = `<h4>Total: $${arrayTotal}</h4>`
+}
