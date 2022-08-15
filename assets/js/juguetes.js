@@ -156,6 +156,11 @@ function pintarCarrito(array, contenedor) {
         div.classList.add('d-flex', 'justify-content-center')
         div.innerHTML = `
         <div class="card mb-3" style="max-width: 90%;">
+        <button type="button" name="boton" class="close align-self-end border-0 bg-white" id=close-${ele.id} aria-label="Close" style="width: 3rem">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+        </button>
             <div class="row g-0">
             <div class="col-md-4 d-flex justify-content-center align-items-center">
                 <img src="${ele.imagen}" class="img-fluid rounded-start object-fit " style="width: auto; height: auto" alt="...">
@@ -179,6 +184,8 @@ function pintarCarrito(array, contenedor) {
         contenedor.appendChild(div)
         const btnSumar = document.querySelectorAll(`#mas-${ele.id}`);
         const btnResta = document.querySelectorAll(`#menos-${ele.id}`);
+        const close = document.querySelectorAll(`#close-${ele.id}`);
+
         btnSumar.forEach(boton => boton.addEventListener('click', () => {
             sumarCantidad(ele.id, ele.stock)
         }))
@@ -186,6 +193,14 @@ function pintarCarrito(array, contenedor) {
         btnResta.forEach( boton => boton.addEventListener('click', () => {
             restarCantidad(ele.id, ele.stock)
         }))
+
+        close.forEach(item => item.addEventListener('click', ()=>{
+            let filtro = carrito.find(item => item.id === ele.id)
+            carrito = carrito.filter(item => item != filtro)
+            pintarCarrito(carrito, contenedorCarrito)
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+        }))
+
     })
 }
 
@@ -223,7 +238,7 @@ function restarCantidad(idProducto){
     carrito = carrito.map( ele => {
             if(ele.id === idProducto && ele.cantidad > 1){
                 ele.cantidad +=1;
-                ele.total += ele.total;
+                cantidadTotal = ele.total += ele.total;
                 cantidadTotal += ele.total
             }
             return ele;
