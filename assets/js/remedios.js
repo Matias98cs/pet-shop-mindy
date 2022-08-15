@@ -10,6 +10,7 @@ const canvasBody = document.querySelector('.offcanvas-body')
 
 
 let carrito = [];
+let total = 0
 
 const getData = async () => {
     await fetch("https://apipetshop.herokuapp.com/api/articulos")
@@ -186,10 +187,13 @@ function pintarCarrito(array, contenedor) {
             </div>
         </div>
         `
-        array.length > 0 ? contenedor.appendChild(div) : contenedor.innerHTML = 'Carrito vacio. Por favor ingrese algun producto para realizar una compra.'
+        contenedor.appendChild(div)
+        const totalCarrito = document.querySelector("#total")
         const btnSumar = document.querySelectorAll(`#mas-${ele.id}`);
         const btnResta = document.querySelectorAll(`#menos-${ele.id}`);
         const close = document.querySelectorAll(`#close-${ele.id}`)
+        
+        cuentaCarrito(array, totalCarrito)
 
         btnSumar.forEach(boton => boton.addEventListener('click', () => {
             sumarCantidad(ele.id, ele.stock)
@@ -203,19 +207,19 @@ function pintarCarrito(array, contenedor) {
             let filtro = carrito.find(item => item.id === ele.id)
             carrito = carrito.filter(item => item != filtro)
             pintarCarrito(carrito, contenedorCarrito)
+            if(carrito.length === 0){
+            document.querySelector("#total").innerHTML = ""
+            }
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }))
-})
-}
-
-const eliminarProducto = (idProducto,) => {
-    
+    })
 }
 
 btnVaciar.addEventListener('click', ()=>{
     contenedorCarrito.innerHTML = ''
     console.log("localStorage borrado")
     carrito = [];
+    document.querySelector("#total").innerHTML = ""
     localStorage.clear()
 })
 
@@ -254,7 +258,7 @@ function restarCantidad(idProducto){
 }
 
 comprar.addEventListener('click', () => {
-
+    
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn m-1',
@@ -264,7 +268,7 @@ comprar.addEventListener('click', () => {
     })
     swalWithBootstrapButtons.fire({
         title: '¿Quieres realizar la compra?',
-        text: "Estas por comprar",
+        text: `${document.querySelector("#total").textContent}`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Comprar',
@@ -291,3 +295,8 @@ comprar.addEventListener('click', () => {
 
     })
 })
+
+const cuentaCarrito = (array, contenedor) => {
+    let arrayTotal = array.map(item => item.total).reduce((acc, total) => acc+total)
+    contenedor.innerHTML = `<h4>Total: $${arrayTotal}</h4>`
+}

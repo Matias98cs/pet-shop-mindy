@@ -54,7 +54,6 @@ function pintarProductos(array, contenedor) {
 
         const btnComprar = document.querySelector(`#producto-${item._id}`);
         btnComprar.addEventListener('click', () => {
-            console.log(item._id)
             agregarCompras(item._id, array);
         })
     });
@@ -139,10 +138,8 @@ function agregarCompras(nroId, array) {
         carrito = [...carrito, nuevoObj];
     }
 
-    console.log(carrito)
     pintarCarrito(carrito, contenedorCarrito);
     let carritoString = JSON.stringify(carrito);
-    console.log(carritoString);
     localStorage.setItem('carrito', carritoString);
 }
 
@@ -150,6 +147,8 @@ function pintarCarrito(array, contenedor) {
 
     contenedor.innerHTML = ""
     array.forEach(ele => {
+        let total = ele.cantidad * ele.precio;
+        ele.total = total
         let div = document.createElement('div');
         div.style.width = "20rem";
         div.style.height = "auto";
@@ -170,7 +169,7 @@ function pintarCarrito(array, contenedor) {
                     <p class="card-title"><b>${ele.nombre}</b></p>
                     <p class="card-text"><small class="text-muted">Stock: </small><strong>${ele.stock}</strong></p>
                     <p class="card-text">Cantidad: ${ele.cantidad}</p>
-                    <p class="card-text"><small class="text-muted">Precio: $${ele.precio}</small></p>
+                    <p class="card-text"><small class="text-muted">Precio: $${total}</small></p>
 
                 <div class="d-flex justify-content-evenly">
                     <button id="mas-${ele.id}" type="button" style="width:2.5rem" class="btn btn-light">+</button>
@@ -182,22 +181,28 @@ function pintarCarrito(array, contenedor) {
         </div>
         `
         contenedor.appendChild(div)
+        const totalCarrito = document.querySelector("#total")
         const btnSumar = document.querySelectorAll(`#mas-${ele.id}`);
         const btnResta = document.querySelectorAll(`#menos-${ele.id}`);
-        const close = document.querySelectorAll(`#close-${ele.id}`);
+        const close = document.querySelectorAll(`#close-${ele.id}`)
+
+        cuentaCarrito(array, totalCarrito)
 
         btnSumar.forEach(boton => boton.addEventListener('click', () => {
             sumarCantidad(ele.id, ele.stock)
         }))
 
         btnResta.forEach( boton => boton.addEventListener('click', () => {
-            restarCantidad(ele.id, ele.stock)
+            restarCantidad(ele.id)
         }))
 
         close.forEach(item => item.addEventListener('click', ()=>{
             let filtro = carrito.find(item => item.id === ele.id)
             carrito = carrito.filter(item => item != filtro)
             pintarCarrito(carrito, contenedorCarrito)
+            if(carrito.length === 0){
+            document.querySelector("#total").innerHTML = ""
+            }
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }))
 
@@ -222,12 +227,13 @@ function sumarCantidad(idProducto, stock){
 
     carrito = carrito.map( ele => {
             if(ele.id === idProducto && ele.cantidad < stock){
-                ele.cantidad +=1
-            }else{
-                console.log('ya se agoto no hay mas!!!!');
+                ele.cantidad +=1;
+                cantidadTotal = ele.total += ele.total;
+                cantidadTotal += ele.total
             }
             return ele;
     })
+
     localStorage.setItem('carrito', JSON.stringify(carrito));
     pintarCarrito(carrito, contenedorCarrito);
 }
@@ -237,9 +243,7 @@ function restarCantidad(idProducto){
 
     carrito = carrito.map( ele => {
             if(ele.id === idProducto && ele.cantidad > 1){
-                ele.cantidad +=1;
-                cantidadTotal = ele.total += ele.total;
-                cantidadTotal += ele.total
+                ele.cantidad -=1;
             }
             return ele;
     })
@@ -257,7 +261,7 @@ comprar.addEventListener('click', () => {
     })
     swalWithBootstrapButtons.fire({
         title: '¿Quieres realizar la compra?',
-        text: "Estas por comprar",
+        text: `${document.querySelector("#total").textContent}`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Comprar',
@@ -285,3 +289,8 @@ comprar.addEventListener('click', () => {
 
     })
 })
+
+const cuentaCarrito = (array, contenedor) => {
+    let arrayTotal = array.map(item => item.total).reduce((acc, total) => acc+total)
+    contenedor.innerHTML = `<h4>Total: $${arrayTotal}</h4>`
+}
